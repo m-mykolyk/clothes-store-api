@@ -33,7 +33,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         if(isDeleted) {
             products.add(product);
         } else {
-            throw new UserNotFoundException();
+            throw new ProductNotFoundException();
         }
         return product;
     }

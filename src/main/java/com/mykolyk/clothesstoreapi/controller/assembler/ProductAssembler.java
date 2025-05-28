@@ -23,15 +23,15 @@ public class ProductAssembler extends RepresentationModelAssemblerSupport<Produc
 
     @Override
     public ProductModel toModel(ProductDto entity) {
-        ProductModel ProductModel = new ProductModel(entity);
+        ProductModel productModel = new ProductModel(entity);
 
         Link get = linkTo(methodOn(ProductController.class).getProduct(entity.getId())).withRel(GET_REL);
         Link create = linkTo(methodOn(ProductController.class).createProduct(entity)).withRel(CREATE_REL);
         Link update = linkTo(methodOn(ProductController.class).updateProduct(entity.getId(), entity)).withRel(UPDATE_PRODUCT);
         Link delete = linkTo(methodOn(ProductController.class).deleteProduct(entity.getId())).withRel(DELETE_PRODUCT);
 
-        ProductModel.add(get, create, update, delete);
+        productModel.add(get, create, update, delete);
 
-        return ProductModel;
+        return productModel;
     }
 }
