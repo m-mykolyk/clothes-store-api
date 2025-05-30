@@ -1,5 +1,6 @@
 package com.mykolyk.clothesstoreapi.repository.impl;
 
+import com.mykolyk.clothesstoreapi.exception.OrderNotFoundException;
 import com.mykolyk.clothesstoreapi.model.Order;
 import com.mykolyk.clothesstoreapi.repository.OrderRepository;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         return orders.stream()
                 .filter(order -> order.getId() == id)
                 .findFirst()
-                .orElseThrow(); //TODO Create a custom exception
+                .orElseThrow(OrderNotFoundException::new);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         if(isDeleted) {
             orders.add(order);
         } else {
-            throw new RuntimeException(); //TODO Crate a custom exception
+            throw new OrderNotFoundException();
         }
         return order;
     }
